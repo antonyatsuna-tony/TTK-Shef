@@ -8,13 +8,14 @@ branches:
 
 jobs:
 build:
+name: Build Android APK
 runs-on: ubuntu-latest
 
 steps:
   - name: Checkout repository
     uses: actions/checkout@v4
 
-  - name: Set up JDK
+  - name: Set up Java
     uses: actions/setup-java@v4
     with:
       distribution: temurin
@@ -23,7 +24,7 @@ steps:
   - name: Set up Android SDK
     uses: android-actions/setup-android@v3
 
-  - name: Build APK
+  - name: Build debug APK
     run: |
       chmod +x gradlew
       ./gradlew assembleDebug

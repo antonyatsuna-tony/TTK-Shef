@@ -1,33 +1,27 @@
-name: Build Android APK
+name: Android APK Build
 
-'on':
-workflow_dispatch:
-push:
-branches:
-- main
+on: [push, workflow_dispatch]
 
 jobs:
 build:
-name: Build debug APK
 runs-on: ubuntu-latest
 
 steps:
-  - name: Checkout repository
+  - name: Download repository
     uses: actions/checkout@v4
 
-  - name: Set up JDK 17
+  - name: Install Java
     uses: actions/setup-java@v4
     with:
       distribution: temurin
       java-version: '17'
 
-  - name: Build debug APK
+  - name: Build APK
     working-directory: TTK_Shef
     run: gradle assembleDebug
 
-  - name: Upload APK
+  - name: Save APK
     uses: actions/upload-artifact@v4
     with:
-      name: TTK-Shef-debug-APK
+      name: TTK-Shef-APK
       path: TTK_Shef/app/build/outputs/apk/debug/*.apk
-      if-no-files-found: error

@@ -1,6 +1,6 @@
 name: Build Android APK
 
-on:
+'on':
 workflow_dispatch:
 push:
 branches:
@@ -10,10 +10,6 @@ jobs:
 build:
 name: Build debug APK
 runs-on: ubuntu-latest
-
-defaults:
-  run:
-    working-directory: TTK_Shef
 
 steps:
   - name: Checkout repository
@@ -25,10 +21,8 @@ steps:
       distribution: temurin
       java-version: '17'
 
-  - name: Set up Gradle
-    uses: gradle/actions/setup-gradle@v4
-
   - name: Build debug APK
+    working-directory: TTK_Shef
     run: gradle assembleDebug
 
   - name: Upload APK
